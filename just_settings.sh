@@ -78,6 +78,9 @@ defaults write com.apple.DiskUtility advanced-image-options -bool true
 defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
 defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
 
+#Activate dark mode
+defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true
+
 for app in "Activity Monitor" \
 	"Dock" \
 	"Finder" \
