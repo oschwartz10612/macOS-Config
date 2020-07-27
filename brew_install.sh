@@ -71,6 +71,7 @@ private-internet-access
 postman
 obs
 mos
+iterm2
 )
 
 echo "Installing cask apps..."
