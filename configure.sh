@@ -73,6 +73,7 @@ obs
 mos
 iterm2
 microsoft-office
+tor-browser
 )
 
 echo "Installing cask apps..."
