@@ -72,6 +72,7 @@ iterm2
 microsoft-office
 tor-browser
 unity-hub
+zoomus
 )
 
 echo "Installing cask apps..."
