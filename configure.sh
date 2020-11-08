@@ -24,7 +24,6 @@ python
 node
 poppler
 gcc
-avr-gcc
 )
 
 echo "Installing packages..."
@@ -34,7 +33,7 @@ echo "Cleaning up..."
 brew cleanup
 
 echo "Installing brew cask..."
-brew install caskroom/cask/brew-cask
+brew install homebrew/caskroom
 
 CASKS=(
 android-platform-tools
@@ -57,8 +56,6 @@ bartender
 discord
 electrum
 eagle
-filezilla
-java
 istat-menus
 meshmixer
 vlc
@@ -74,6 +71,7 @@ mos
 iterm2
 microsoft-office
 tor-browser
+unity-hub
 )
 
 echo "Installing cask apps..."
