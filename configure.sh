@@ -25,6 +25,7 @@ node
 poppler
 gcc
 ffmpeg
+youtube-dl
 )
 
 echo "Installing packages..."
