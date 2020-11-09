@@ -24,6 +24,7 @@ python
 node
 poppler
 gcc
+ffmpeg
 )
 
 echo "Installing packages..."
