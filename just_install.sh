@@ -54,7 +54,6 @@ slack
 appcleaner
 balenaetcher
 docker
-bartender
 discord
 electrum
 eagle
