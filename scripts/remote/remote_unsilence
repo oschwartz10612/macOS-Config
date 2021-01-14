@@ -56,16 +56,17 @@ while test $# -gt 0; do
       shift
       ;;
     -c|--copy)
+      shift
         if test $# -gt 0; then
             if [[ -n "$2" ]]
             then
                 echo "Transfering $1 from instance to $2..."
-                gcloud compute scp remote:~/$1 $2 --zone=us-east4-c
+                gcloud compute scp --ssh-key-file=~/.ssh/remote_unsilence remote:~/$1 $2 --zone=us-east4-c
             else
                 if [[ -n "$1" ]]
                 then
                     echo "Transfering $1 to instance..."
-                    gcloud compute scp $1 remote:~ --zone=us-east4-c
+                    gcloud compute --ssh-key-file=~/.ssh/remote_unsilence scp $1 remote:~ --zone=us-east4-c
                 fi
             fi
 
@@ -89,6 +90,11 @@ while test $# -gt 0; do
     --start)
         shift
             gcloud compute instances start remote --zone=us-east4-c
+        shift
+      ;;
+    --describe)
+        shift
+            gcloud compute instances describe 'remote' --zone 'us-east4-c'
         shift
       ;;
     *)
