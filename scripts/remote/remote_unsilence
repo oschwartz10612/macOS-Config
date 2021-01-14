@@ -11,6 +11,7 @@ else
 fi
 }
 
+check_running() {
 if gcloud compute instances describe 'remote' --zone 'us-east4-c' | grep -q "status: RUNNING" ; 
 then
     echo "Instance running..."
@@ -26,6 +27,7 @@ else
         exit 0
     fi
 fi
+}
 
 while test $# -gt 0; do
   case "$1" in
@@ -43,7 +45,7 @@ while test $# -gt 0; do
     -u|--unsilence)
       shift
       if test $# -gt 0; then
-        
+        check_running
         gcloud compute scp --ssh-key-file=~/.ssh/remote_unsilence $1 remote:~ --zone=us-east4-c
         gcloud compute ssh --ssh-key-file=~/.ssh/remote_unsilence remote --zone=us-east4-c -- "/home/owenschwartz/.local/bin/unsilence $1 unsilenced_$1 -t 16 -y"
         gcloud compute scp --ssh-key-file=~/.ssh/remote_unsilence remote:~/unsilenced_$1 ./ --zone=us-east4-c
@@ -58,6 +60,7 @@ while test $# -gt 0; do
     -c|--copy)
       shift
         if test $# -gt 0; then
+          check_running
             if [[ -n "$2" ]]
             then
                 echo "Transfering $1 from instance to $2..."
@@ -79,11 +82,13 @@ while test $# -gt 0; do
         ;;
     --ssh)
       shift
+      check_running
         gcloud compute ssh --ssh-key-file=~/.ssh/remote_unsilence remote --zone=us-east4-c
       shift
       ;;
     --stop)
         shift
+          check_running
             gcloud compute instances stop remote --zone=us-east4-c
         shift
       ;;
@@ -98,6 +103,7 @@ while test $# -gt 0; do
         shift
       ;;
     *)
+      echo "Command not recognized..."
       break
       ;;
   esac
