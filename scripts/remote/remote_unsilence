@@ -29,6 +29,17 @@ else
 fi
 }
 
+check_stop() {
+  read -p "Would you like to stop the instance? " -n 1 -r
+  echo    # (optional) move to a new line
+  if [[ $REPLY =~ ^[Yy]$ ]]
+  then
+      gcloud compute instances stop remote --zone=us-east4-c
+  else
+      exit 0
+  fi
+}
+
 while test $# -gt 0; do
   case "$1" in
     -h|--help)
@@ -49,6 +60,7 @@ while test $# -gt 0; do
         gcloud compute scp --ssh-key-file=~/.ssh/remote_unsilence $1 remote:~ --zone=us-east4-c
         gcloud compute ssh --ssh-key-file=~/.ssh/remote_unsilence remote --zone=us-east4-c -- "/home/owenschwartz/.local/bin/unsilence $1 unsilenced_$1 -t 16 -y"
         gcloud compute scp --ssh-key-file=~/.ssh/remote_unsilence remote:~/unsilenced_$1 ./ --zone=us-east4-c
+        check_stop
 
         exit 0
       else
