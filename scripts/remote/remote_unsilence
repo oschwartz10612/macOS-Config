@@ -71,7 +71,7 @@ while test $# -gt 0; do
       if test $# -gt 0; then
         check_running
         gcloud compute scp --ssh-key-file=~/.ssh/unsilence $1 $INSTANCE:~ --zone=us-east4-c
-        gcloud compute ssh --ssh-key-file=~/.ssh/nsilence $INSTANCE --zone=us-east4-c -- "/home/owenschwartz/.local/bin/unsilence $1 unsilenced_$1 -t 16 -y"
+        gcloud compute ssh --ssh-key-file=~/.ssh/unsilence $INSTANCE --zone=us-east4-c -- "/home/owenschwartz/.local/bin/unsilence $1 unsilenced_$1 -t 16 -y"
         gcloud compute scp --ssh-key-file=~/.ssh/unsilence $INSTANCE:~/unsilenced_$1 ./ --zone=us-east4-c
         check_stop
 
