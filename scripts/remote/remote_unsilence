@@ -70,9 +70,9 @@ while test $# -gt 0; do
       shift
       if test $# -gt 0; then
         check_running
-        gcloud compute scp --ssh-key-file=~/.ssh/$INSTANCE_unsilence $1 $INSTANCE:~ --zone=us-east4-c
-        gcloud compute ssh --ssh-key-file=~/.ssh/$INSTANCE_unsilence $INSTANCE --zone=us-east4-c -- "/home/owenschwartz/.local/bin/unsilence $1 unsilenced_$1 -t 16 -y"
-        gcloud compute scp --ssh-key-file=~/.ssh/$INSTANCE_unsilence $INSTANCE:~/unsilenced_$1 ./ --zone=us-east4-c
+        gcloud compute scp --ssh-key-file=~/.ssh/unsilence $1 $INSTANCE:~ --zone=us-east4-c
+        gcloud compute ssh --ssh-key-file=~/.ssh/nsilence $INSTANCE --zone=us-east4-c -- "/home/owenschwartz/.local/bin/unsilence $1 unsilenced_$1 -t 16 -y"
+        gcloud compute scp --ssh-key-file=~/.ssh/unsilence $INSTANCE:~/unsilenced_$1 ./ --zone=us-east4-c
         check_stop
 
         exit 0
@@ -89,12 +89,12 @@ while test $# -gt 0; do
             if [[ -n "$2" ]]
             then
                 echo "Transfering $1 from instance to $2..."
-                gcloud compute scp --ssh-key-file=~/.ssh/$INSTANCE_unsilence $INSTANCE:~/$1 $2 --zone=us-east4-c
+                gcloud compute scp --ssh-key-file=~/.ssh/unsilence $INSTANCE:~/$1 $2 --zone=us-east4-c
             else
                 if [[ -n "$1" ]]
                 then
                     echo "Transfering $1 to instance..."
-                    gcloud compute --ssh-key-file=~/.ssh/$INSTANCE_unsilence scp $1 $INSTANCE:~ --zone=us-east4-c
+                    gcloud compute --ssh-key-file=~/.ssh/unsilence scp $1 $INSTANCE:~ --zone=us-east4-c
                 fi
             fi
 
@@ -108,7 +108,7 @@ while test $# -gt 0; do
     --ssh)
       shift
       check_running
-        gcloud compute ssh --ssh-key-file=~/.ssh/$INSTANCE_unsilence $INSTANCE --zone=us-east4-c
+        gcloud compute ssh --ssh-key-file=~/.ssh/unsilence $INSTANCE --zone=us-east4-c
       shift
       ;;
     --stop)
